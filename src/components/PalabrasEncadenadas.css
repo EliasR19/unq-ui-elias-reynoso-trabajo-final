@@ -1,0 +1,70 @@
+@import url('../assets/fonts/Geo/geo.css');
+.mainContainer {
+    background-color: #2D4059;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+}
+.navBarContainer{
+    background-color: #FFD460;
+    font-size: 32px;
+    color: #EA5455;
+    width: 20%;
+}
+.gameContainer{
+    flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Geo';
+}
+.inputPalabra{
+    border: 0;
+    outline: 0;
+    padding: '0';
+    width: 20ch;
+    font-family: 'Geo';
+    font-size: 32px;
+    background-color: transparent;
+    padding: 0;
+}
+.palabrasRepetidasContainer{
+    width: 25%;
+    font-family: 'Geo';
+    font-size: 1.5em;
+
+}
+.palabrasRepetidasList{
+    
+}
+.gameMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 32px;
+    align-items: center;
+
+}
+
+.titleTextContainer{
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.titleText {
+    font-size: 3em;
+    padding: 15px;
+}
+
+.textSize{
+    max-width: 30ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.puntajeNum{
+    font-size: 32px;
+}

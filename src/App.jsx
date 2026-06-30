@@ -51,7 +51,7 @@ function App() {
     
   return (
     <>
-      <section id="center">
+      <div id="center">
         <div>
           <h1>La palabra "{letraRequerida}{palabraI}"</h1>
             <form onSubmit={validarPalabra}>
@@ -81,7 +81,7 @@ function App() {
               ))}
             </div>
         </div>
-      </section>
+      </div>
 
     </>
   )
