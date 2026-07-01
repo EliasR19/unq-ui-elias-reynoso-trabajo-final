@@ -1,0 +1,29 @@
+.timerContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.timerBarProgressContainer {
+    height: 5px;
+    width: 80%;
+    background-color: #e0e0e0;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+}
+.timerBarProgress {
+    transition: width 1s linear;
+    height: 100%;
+}
+
+.timerBarProgress.full {
+    background-color: green;
+}
+.timerBarProgress.mid {
+    background-color: yellow;
+}
+.timerBarProgress.low {
+    background-color: red;
+}

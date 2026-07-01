@@ -11,6 +11,10 @@
     font-size: 32px;
     color: #EA5455;
     width: 20%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .gameContainer{
     flex-grow: 1;
@@ -33,10 +37,11 @@
     width: 25%;
     font-family: 'Geo';
     font-size: 1.5em;
+    border-left: 3px  dashed #9ca3af;
 
 }
 .palabrasRepetidasList{
-    
+    list-style-type: none;
 }
 .gameMain{
     display: flex;

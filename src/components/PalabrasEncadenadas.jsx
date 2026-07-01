@@ -2,17 +2,20 @@ import './PalabrasEncadenadas.css'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Timer from './timer';
+import LeaderBoard from './LeaderBoard';
+
 
 function PalabrasEncadenadas() {
     const [count, setCount] = useState(0)
     const [isGood, setIsGood] = useState(null);
     const [palabraI, setPalabraI] = useState("")
-    const [letraRequerida, setLetraRequerida] = useState('A')
+    const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
 
     const [palabrasUsadas, setPalabrasUsadas] = useState([])
     const palabrasCon = palabrasUsadas.filter(p => p.charAt(0) === letraRequerida);
 
+    const [jugando, setJugando] = useState(false)
 
 
     //### VALIDADOR DE PALABRA
@@ -26,32 +29,40 @@ function PalabrasEncadenadas() {
     const validarPalabra = async (e) => {
         e.preventDefault();
 
-        setIsRunning(true)
-        const palabraLimpia = letraRequerida+palabraI.toLowerCase();
+        const palabraLimpia = palabraI.toLowerCase();
         const url = `https://word-api-hmlg.vercel.app/api/validate?word=${palabraLimpia}`
+        
         try {
-            if(palabrasUsadas.includes(palabraLimpia)){
-            setPalabraI("")  
-            alert(`¡La palabra "${letraRequerida}${palabraI}" ya fue usada! Elige otra.`);
-            return;
+            if(jugando){
+                if(palabrasUsadas.includes(palabraLimpia)){
+                    setPalabraI("")  
+                    alert(`¡La palabra "${palabraI}" ya fue usada! Elige otra.`);
+                    return;
+                }
+                if(palabraLimpia.charAt(0) != letraRequerida){
+                    setPalabraI("")  
+                    alert(`¡La palabra "${palabraI}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+                    return;
+                }
             }
+            
             const validador = await axios.get(url)
 
-
             if(validador.data.exists){
+                setIsRunning(true)
+                setJugando(true)
                 palabrasUsadas.push(palabraLimpia)
-                setLetraRequerida(palabraLimpia.charAt(palabraI.length))
+                setLetraRequerida(palabraLimpia.charAt(palabraI.length-1))
                 setPuntaje(punteja+palabraLimpia.length)
-                console.log(palabrasUsadas, " | ", letraRequerida)
                 setTiempo((tiempoAcutal) => 15)
+            } else {
+                setPalabraI("")  
+                alert(`¡La palabra "${palabraI}" no existe`);
+                return;
             }
 
-            console.log("Letra:", palabraI.charAt(palabraI.length))
-            
             setIsGood(validador.data.exists)
             setPalabraI("")            
-
-            console.log(palabrasCon)
 
             return;
                 
@@ -68,6 +79,7 @@ function PalabrasEncadenadas() {
     useEffect(() => {
         if(tiempo <= 0){
             setIsRunning(false);
+            setJugando(false);
             return;
         }
         let interval = null;
@@ -81,21 +93,20 @@ function PalabrasEncadenadas() {
     
   return (
     <div class="mainContainer">
-        <div class="navBarContainer">
-                <p>Palabras Encadendas</p>
-                <p>Mejores Puntajes</p>
+        <div className='navBarContainer'>
+            <p>Palabras Encadendas</p>
+            <LeaderBoard playerName="ER1" points={punteja}/>
         </div>
 
         <div class="gameContainer">
-        <Timer tiempo={tiempo} />
             <p class="puntajeNum">{punteja}</p>
             <div class="titleTextContainer">
-                <p class="titleText textSize">Palabra con {letraRequerida.toUpperCase()}{palabraI}</p>
+                <p class="titleText textSize">Palabra con {letraRequerida.toUpperCase()}</p>
             </div>
 
             <div>
                 <form onSubmit={validarPalabra} class="gameMain">
-                    <p>{letraRequerida.toUpperCase()}</p>
+                    
                     <input 
                         type="text"
                         value={palabraI}
@@ -106,6 +117,7 @@ function PalabrasEncadenadas() {
                         />
                         <button type="submit">Enviar</button>
                 </form>
+                <Timer tiempo={tiempo} />
             </div>  
                 <p>Es valida? {isGood == null ? "Ingrese Palabra": isGood ? "True" : "False"} </p>
         </div>
