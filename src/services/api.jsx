@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
-const App = () => {
-    const [isGoods, setIsGood] = useState(null);
+const url = `https://word-api-hmlg.vercel.app/api/validate?word=`
 
-    useEffect
-
+export const verificarPalabra =  (palabra) => {
+     return axios.get(url+palabra);
 }
