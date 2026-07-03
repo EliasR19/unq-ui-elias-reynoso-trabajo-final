@@ -2,7 +2,7 @@ import './PalabrasEncadenadas.css'
 import { useEffect, useState } from 'react';
 import Timer from './timer';
 import LeaderBoard from './LeaderBoard';
-import { verificarPalabra } from '../services/api';
+import { verificarPalabra, listaEjemplo } from '../services/api';
 import './Timer.css'
 
 function PalabrasEncadenadas() {
@@ -11,8 +11,10 @@ function PalabrasEncadenadas() {
     const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
     
-    const [palabrasUsadas, setPalabrasUsadas] = useState([])//"arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol","arbol"])
+    const [palabrasUsadas, setPalabrasUsadas] = useState(listaEjemplo)
     
+    const [errorCount, setErrorCount] = useState(0);
+    const [error, setError] = useState("")
     const palabrasCon = palabrasUsadas.filter(p => p.charAt(0) === letraRequerida);
     
     
@@ -34,32 +36,41 @@ function PalabrasEncadenadas() {
 
     const validarPalabra = async (e) => {
         e.preventDefault();
-
+        setError("")
+        console.log("letraRequerida+palabraI: ", letraRequerida+palabraI);
+        
         const palabraLimpia = normlizarPalabra(letraRequerida+palabraI);
         console.log("palabraLimpia: ", palabraLimpia)
         if(palabraLimpia.trim() === "") return;
-
+        
         const isValid =  await validador(palabraLimpia);
+        setIsValidWord(isValid.data.exists);
 
             if(isRunning){
                 if(palabrasUsadas.includes(palabraLimpia)){
                     setPalabraI("")  
-                    alert(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`);
+                    //alert(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`);
+                    setError(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`)
+                    setIsValidWord(false)
+                    setErrorCount(prev => prev + 1)
                     return;
                 }
                 if(palabraLimpia.charAt(0) != letraRequerida){
                     setPalabraI("")  
-                    alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+                    //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+                    setError(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`)
+                    setIsValidWord(false)
+                    setErrorCount(prev => prev + 1)
                     return;
                 }
             } else {
+                //Validar la palabra
                 setIsRunning(true)
                 setPalabrasUsadas([...palabrasUsadas, palabraLimpia])
                 setLetraRequerida(palabraLimpia.charAt(normlizarPalabra(palabraI).length-1))
                 setPuntaje(punteja+palabraLimpia.length)
                 setTiempo(() => 15)
 
-                setIsValidWord(isValid.data.exists)
                 setPalabraI("")   
                 return;
             }
@@ -67,6 +78,8 @@ function PalabrasEncadenadas() {
             //PENSAR FORMA PARA NO REPETIR CODIGO
 
             if(isValid.data.exists){
+                console.log("palabra valida");
+                
                 setPalabrasUsadas([...palabrasUsadas, palabraLimpia])
                 setLetraRequerida(palabraLimpia.charAt(palabraI.length))
                 setPuntaje(punteja+palabraLimpia.length)
@@ -74,17 +87,21 @@ function PalabrasEncadenadas() {
 
             } else {
                 setPalabraI("")  
-                alert(`¡La palabra "${palabraI}" no existe`);
+                setErrorCount(prev => prev + 1)
+                //alert(`¡La palabra "${palabraI}" no existe`);
+                setError(`¡La palabra "${palabraLimpia}" no existe`)
                 return;
             }
             
-            setIsValidWord(isValid.data.exists)
+
             setPalabraI("")            
             return;
 
     }
+
+
     
-    console.log(palabrasUsadas + " | " + letraRequerida )
+   // console.log(palabrasUsadas + " | " + letraRequerida )
     
     // ### TIMER
     //Se puede mover a un componente header
@@ -107,9 +124,13 @@ function PalabrasEncadenadas() {
       return 'green'
     })
 
+
     
   return (
-    <div class="pageContainer">
+    <div className={`pageContainer`}>
+
+        <div key={errorCount} className={`fondoError ${errorCount > 0 ? 'error' : ''}`} />
+
         <div className='navBarContainer'>
             <p>Palabras Encadendas</p>
             <LeaderBoard playerName="ER1" points={punteja}/>
@@ -152,26 +173,38 @@ function PalabrasEncadenadas() {
                             <button className="botonSubmit" type="submit">Enviar</button>
                     </form>
                     <div className='inputLine'></div>
-                    <p>Es valida? {isValidWord == null ? "Ingrese Palabra": isValidWord ? "True" : "False"} </p>
+                    {error == "" ? (
+                        <p>Es valida? {isValidWord == null ? "Ingrese Palabra": isValidWord ? "True" : "False"} </p>
+                    ) : (
+                        <p>Error: {error}</p>
+                        )
+                    }
                 
                 </div>  
 
                     <div class="palabrasRepetidasContainer">
+
                         {palabrasUsadas.length > 0 ? (
                             <p>Palabras usadas con <strong>{letraRequerida.toUpperCase()}</strong></p>
-
                         ) : (
                             <p>Todavia no se ha empezado el juego</p>
                             )
                         }                        
 
                             <div class="palabrasRepetidasList">
+
                                 {palabrasUsadas.map((palabra, index) => (
-                                    <div key={`${palabra} + "_" + ${index}`}>
-                                        <p><strong>{palabra}</strong> →&nbsp;</p>
+                                    <div className='palabraSingular' key={`${palabra} + "_" + ${index}`}>
+                                    {palabra.charAt(0) === letraRequerida ? (
+                                        <p className='palabraMarcada'>{palabra}</p>
+                                    ) : (
+                                        <p>{palabra}</p>
+                                    )}
+                                     <p> →&nbsp;</p>
                                     </div>           
                                 ))}
-                        </div>
+                            </div>
+
                     </div>
                 </div>
          </div>                           

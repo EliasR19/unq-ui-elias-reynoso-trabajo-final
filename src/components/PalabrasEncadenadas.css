@@ -6,6 +6,38 @@
     width: 100%;
     flex-grow: 1;
 }
+.pageContainer > *:not(.fondo-animado) {
+    /*busca todos los elementos que sean hijos directos de .pageContainer, EXCEPTO el que tenga la clase .fondoError*/
+    z-index: 1;
+}
+@keyframes errorBack {
+    0% {
+        background-color: #ff4d4d; 
+    }
+    100% {
+        background-color: #2d4059;
+    }
+}
+
+.fondoError {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Se queda atrás de todo */
+    background-color: #2D4059;
+}
+
+.fondoError.error {
+    animation: errorBack 1s ease-out forwards;
+}
+
+@keyframes errorBack {
+    0% { background-color: #ff4d4d; }
+    100% { background-color: #2D4059; }
+}
+
 .navBarContainer{
     background-color: #FFD460;
     font-size: 32px;
@@ -134,3 +166,10 @@
     font-size: 80px;
 }
 
+.palabraMarcada {
+    color: white;
+    text-decoration: underline 1px white;
+}
+.palabraSingular {
+    display: flex;
+}
