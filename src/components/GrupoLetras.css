@@ -1,0 +1,27 @@
+.listaPalabrasFinal{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background-color: #577092;
+    padding: 10px;
+    border-radius: 8px;
+}
+.letraHeaderLista{
+    font-size: 2em;
+    line-height: 1;
+}
+.palabrasContainer {
+    display: flex;
+    flex-direction: column;
+}
+.palabrasContainer.multiColumna {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.listaLetraEspesifica{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5em;
+    box-sizing: border-box;
+    width: 100%;
+}
