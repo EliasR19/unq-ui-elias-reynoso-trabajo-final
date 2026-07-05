@@ -1,0 +1,96 @@
+.mainContainerGameOver{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Geo';
+    align-items: center;
+    width: 60%;
+}
+.gameOverContainer{
+    background-color: #2D4059;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+}
+.finalStatsContainer{
+    display: flex;
+    gap: 32px;
+}
+.gameOverText{
+    font-size: 6em;
+    line-height: 1;
+}
+.statsText{
+    font-size: 3em;
+    line-height: 1;
+}
+.line{
+    width: 100%;
+    border: 3px dashed #9ca3af;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.gameBoton{
+    font-family: 'Geo';
+    font-size: 1rem;
+    letter-spacing: 0.1;
+    color: #ffffff;
+    
+    background-color: #577092;
+    
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    
+    border-radius: 8px; 
+    border-bottom: 5px solid #2e62a5; 
+    transition: all 0.1s ease;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #00ffff33;
+}
+
+.gameBoton:hover {
+    background-color: #5d79a1;
+    box-shadow: 0 0 8px #00ffff66;
+}
+
+.gameBoton:active {
+    transform: translateY(3px); 
+    border-bottom: 2px solid #2d3f56; 
+    box-shadow: 0 0 5px #00ffff33; 
+}
+
+
+.navBarContainer{
+    background-color: #FFD460;
+    font-size: 32px;
+    font-family: 'Geo';
+    color: #EA5455;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.navBarTitle{
+    font-size: 2em;
+    line-height: 1;
+}
+
+@media (max-width: 780px) {
+    .gameOverContainer{
+        flex-direction: column;
+        width: 100%;
+    }
+    .mainContainerGameOver{
+        width: 100%;
+    }
+    .navBarContainer{
+        width: 100%;
+    }
+}
