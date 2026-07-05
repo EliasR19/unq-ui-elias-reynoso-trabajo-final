@@ -4,8 +4,10 @@ import Timer from './timer';
 import LeaderBoard from './LeaderBoard';
 import { verificarPalabra, listaEjemplo } from '../services/api';
 import './Timer.css'
+import GameOver from './EndGameScreen';
 
 function PalabrasEncadenadas() {
+    const [pantallaActual, setPantallaActual] = useState('juego');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
     const [letraRequerida, setLetraRequerida] = useState('')
@@ -63,6 +65,14 @@ function PalabrasEncadenadas() {
                     setErrorCount(prev => prev + 1)
                     return;
                 }
+                if(palabraI.trim() === ""){
+                    setPalabraI("")  
+                    //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+                    setError('Ingrese una palabra')
+                    setIsValidWord(false)
+                    setErrorCount(prev => prev + 1)
+                    return;
+                }
             } else {
                 //Validar la palabra
                 setIsRunning(true)
@@ -106,8 +116,9 @@ function PalabrasEncadenadas() {
     // ### TIMER
     //Se puede mover a un componente header
     useEffect(() => {
-        if(tiempo <= 0){
+        if(tiempo <= -1){
             setIsRunning(false);
+            setPantallaActual('gameOver')
             return;
         }
         let interval = null;
@@ -124,11 +135,24 @@ function PalabrasEncadenadas() {
       return 'green'
     })
 
+    const reiniciarJuego = () => {
+        setPantallaActual('juego');
+        setIsValidWord(null);
+        setPalabraI("");
+        setLetraRequerida('');
+        setPuntaje(0);
+        setPalabrasUsadas([]);
+        setErrorCount(0);
+        setError("")
+        setTiempo(15);
+        setIsRunning(false)
+    }
 
     
   return (
     <div className={`pageContainer`}>
-
+        {pantallaActual === 'juego' ? (
+            <>
         <div key={errorCount} className={`fondoError ${errorCount > 0 ? 'error' : ''}`} />
 
         <div className='navBarContainer'>
@@ -207,7 +231,11 @@ function PalabrasEncadenadas() {
 
                     </div>
                 </div>
-         </div>                           
+         </div>  
+         </>       
+         ) : (
+            <GameOver puntaje={punteja} errorCount={errorCount} palabrasUsadas={palabrasUsadas} reiniciar={reiniciarJuego}/>
+         )}                  
     </div>
   )
 }
