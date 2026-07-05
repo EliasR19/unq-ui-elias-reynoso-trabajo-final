@@ -1,3 +1,32 @@
 .leaderBaordContainer{
-    
+    font-family: 'Geo';
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.leaderBoardTitle{
+    font-size: 1em;
+    line-height: 1;
+}
+
+.labelStatsListContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+    line-height: 1;
+}
+
+.statsList{
+    display: flex;
+    flex-direction: row;
+}
+.rankLine{
+    border: 2px dashed #9ca3af;
+    margin-top: 1.2em;
+
+}
+
+.labelText{
+    text-decoration: underline 3px #9ca3af;
 }
