@@ -10,10 +10,10 @@ function PalabrasEncadenadas() {
     const [pantallaActual, setPantallaActual] = useState('juego');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
-    const [letraRequerida, setLetraRequerida] = useState('A')
+    const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
     
-    const [palabrasUsadas, setPalabrasUsadas] = useState(listaEjemplo)
+    const [palabrasUsadas, setPalabrasUsadas] = useState([])//listaEjemplo)
     
     const [errorCount, setErrorCount] = useState(0);
     const [error, setError] = useState("")
@@ -21,6 +21,8 @@ function PalabrasEncadenadas() {
     
     const [tiempo, setTiempo] = useState(15);
     const [isRunning, setIsRunning] = useState(false)
+
+    const [cargando, setCargando] = useState(false);
 
     //### VALIDADOR DE PALABRA
     async function validador(palabraLimpia){
@@ -30,9 +32,12 @@ function PalabrasEncadenadas() {
              console.log(error) // hacer alerta
         }
     }
-  
+    
+    const intentaDeNuevo = "Intenta de nuevo!"
     const validarPalabra = async (e) => {
         e.preventDefault();
+
+        setCargando(true);
         setError("")
         //console.log("letraRequerida+palabraI: ", letraRequerida+palabraI);
         
@@ -43,24 +48,24 @@ function PalabrasEncadenadas() {
         const isValid =  await validador(palabraLimpia);
         setIsValidWord(isValid.data.exists);
 
-
+        setCargando(false)  
 
         //Validadores
         if(isRunning){
             //Se puede mover a un archivo de validadores
             if(palabrasUsadas.includes(palabraLimpia)){
                 //alert(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`);
-                setError(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`)
+                setError(`¡La palabra "${palabraLimpia}" ya fue usada! ${intentaDeNuevo}`)
                 accionesSiPalabraInvalida();
                 return;
             }
             if(palabraLimpia.charAt(0) != letraRequerida){
                 //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
-                setError(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`)
+                setError(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'. ${intentaDeNuevo}`)
                 accionesSiPalabraInvalida();
                 return;
             }
-            if(palabraI.trim() === ""){
+            if(palabraLimpia.trim() === ""){
                 //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
                 setError('Ingrese una palabra')
                 accionesSiPalabraInvalida();
@@ -84,12 +89,12 @@ function PalabrasEncadenadas() {
             setPalabraI("")  
             setErrorCount(prev => prev + 1)
             //alert(`¡La palabra "${palabraI}" no existe`);
-            setError(`¡La palabra "${palabraLimpia}" no existe`)
+            setError(`¡La palabra "${palabraLimpia}" no existe. ${intentaDeNuevo}`)
             return;
         }
 
 
-        setPalabraI("")            
+        setPalabraI("")          
         return;
 
     }
@@ -144,7 +149,17 @@ function PalabrasEncadenadas() {
         setIsRunning(false)
     }
 
-    
+    const textoValidador = () => {
+        if(cargando){
+            return <p>Validando...</p>
+        }
+
+        if(error == ""){
+            return <p className={isValidWord ? "validColor" : ""}>{isValidWord == null ? "Ingrese Palabra": isValidWord ? "Valida" : "Invalida"}</p>
+        }  else {
+            return <p className="errorColor">Error: {error}.</p>
+        }
+    }
   return (
     <div className={`pageContainer`}>
 
@@ -194,12 +209,9 @@ function PalabrasEncadenadas() {
                             <button className="botonSubmit" type="submit">Enviar</button>
                     </form>
                     <div className="errorInputText">
-                        {error == "" ? (
-                            <p>Es valida? {isValidWord == null ? "Ingrese Palabra": isValidWord ? "True" : "False"} </p>
-                        ) : (
-                            <p className="errorColor">Error: {error}</p>
-                            )
-                        }
+
+                        {textoValidador()}
+        
                 </div>
                  
                     <div className="lineGame"></div>

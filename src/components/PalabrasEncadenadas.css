@@ -17,7 +17,7 @@
         background-color: #ff4d4d; 
     }
     100% {
-        background-color: #2d4059;
+        background-color: var(--bg-color);
     }
 }
 
@@ -28,16 +28,11 @@
     width: 100%;
     height: 100%;
     z-index: 0;
-    background-color: #2D4059;
+    background-color: var(--bg-color);
 }
 
 .fondoError.error {
     animation: errorBack 1s ease-out forwards;
-}
-
-@keyframes errorBack {
-    0% { background-color: #ff4d4d; }
-    100% { background-color: #2D4059; }
 }
 .mainContainer{
     flex-grow: 1;
@@ -132,13 +127,13 @@
 
 .botonSubmit {
     border: none;
-    background-color: #2D4059;
+    background-color: var(--bg-color);
     border-radius: 8px; 
-    border-bottom: 5px solid var(--basic-shadow-font-color); 
-    border-right: 5px solid var(--basic-shadow-font-color);
+    border-bottom: 5px solid #47ffff; 
+    border-right: 5px solid #47ffff;
 
     font-family: var(--font-family-general); 
-    color: var(--basic-shadow-font-color);
+    color: #47ffff;
 
 
     margin: 10px;
@@ -147,10 +142,10 @@
 
 }
 .botonSubmit:hover {
-    background-color: var(--basic-shadow-font-color);/*#3546D6*/; 
-    color: var(--basic-font-color);
-    border-bottom: 5px solid #ffffff; 
-    border-right: 5px solid #ffffff;
+    background-color: white;/*#3546D6*/; 
+    color: var(--basic-shadow-font-color);
+    border-bottom: 5px solid var(--basic-shadow-font-color); 
+    border-right: 5px solid var(--basic-shadow-font-color);
 }
 /*
 .botonSubmit:disabled {
@@ -166,9 +161,12 @@
 .errorColor{
     color:#ff4d4d;
 }
+.validColor{
+    color: #34a343;
+}
 
 .lineGame{
-    width: 100%;
+    width: 99%;
     border: 3px dashed #9ca3af;
 }
 
@@ -218,6 +216,8 @@
     line-height: 1;
     margin: 2em;
 
+    width: 100%;
+
     color: var(--primary-font-color);
     text-shadow: var(--primary-shadow-font-color) 5px 1px;
 }
@@ -235,12 +235,19 @@
 
 @media (max-width: 800px){
     .inputPalabra{
-        width: 10ch;
+        width: 100%;
     }
     .gameMainInputContainer{
-        width: 10ch;
+        width: 100%;
+    }
+    .gameMain{
+        flex-direction: column;
     }
     .gameHeader{
         flex-direction: column;
+        font-size: 1em;
+    }
+    .titleText{
+        font-size: 2em;
     }
 }
