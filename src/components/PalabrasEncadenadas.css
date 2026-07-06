@@ -1,4 +1,6 @@
 @import url('../assets/fonts/Geo/geo.css');
+@import url('../assets/fonts/Press_Start_2P/press_start_2p.css');
+
 .pageContainer {
     background-color: #2D4059;
     display: flex;
@@ -25,7 +27,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Se queda atrás de todo */
+    z-index: 0;
     background-color: #2D4059;
 }
 
@@ -42,60 +44,113 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Geo';
+    font-family: var(--font-family-general);
     align-items: center;
+
+    width: 100%;
 }
+
+/*TIMER POINTS HEADER*/
 .gameHeader{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    margin: 20px;
-    font-size: 32px;
+    font-size: 2em;
+    line-height: 1;
+    margin: 20px 0 20px 0;
+
+    color: var(--basic-font-color);
+    text-shadow: var(--basic-shadow-font-color) 5px 1px;
+}
+.puntajeNum{
+    font-size: 2em;
 }
 .timerHeader {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+/*INPUT*/
 .gameContainer{
     flex-grow: 1;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Geo';
+    /*font-family: 'Geo';*/
     align-items: center;
     width: 100%;
+
+    gap: 1em;
 }
 .inputPalabra{
     border: 0;
     outline: 0;
     padding: '0';
     width: 20ch;
-    font-family: 'Geo';
+    font-family: var(--font-family-general);
     font-size: 32px;
     background-color: transparent;
     padding: 0;
+    color: var(--text);
+}
+.inputPalabra::placeholder{
+    color: #ffffff;
+}
+.gameMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 2em;
+    align-items: center;
+
+    
+
+
+}
+.gameMainInputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 20ch;
+}
+.gameMainInput{
+    display: flex;
+    flex-direction: row;
+    line-height: 1;
+    align-items: center;
+}
+.gameMainInput p {
+    color: #ffffff;
 }
 .inputLine{
     border-bottom: 3px solid #9ca3af;
 }
 
 .botonSubmit {
-  background-color: #495DF9;
-  color: #ffffff;
-  font-family: 'Geo'; 
-  font-size: 18px;
-  font-weight: 600;
-  
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    border: none;
+    background-color: #2D4059;
+    border-radius: 8px; 
+    border-bottom: 5px solid var(--basic-shadow-font-color); 
+    border-right: 5px solid var(--basic-shadow-font-color);
+
+    font-family: var(--font-family-general); 
+    color: var(--basic-shadow-font-color);
+
+
+    margin: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
 
 }
 .botonSubmit:hover {
-  background-color: #3546D6; 
+    background-color: var(--basic-shadow-font-color);/*#3546D6*/; 
+    color: var(--basic-font-color);
+    border-bottom: 5px solid #ffffff; 
+    border-right: 5px solid #ffffff;
 }
 /*
 .botonSubmit:disabled {
@@ -105,11 +160,23 @@
   box-shadow: none;
 }
 */
+.errorInputText{
+    
+}
+.errorColor{
+    color:#ff4d4d;
+}
 
+.lineGame{
+    width: 100%;
+    border: 3px dashed #9ca3af;
+}
+
+/*PALABRAS REPETIDAS*/
 .palabrasRepetidasContainer{
     width: 80%;
-    font-family: 'Geo';
-    font-size: 1.5em;
+    /*font-family: 'Geo';*/
+    font-size: 1em;
 
     display: flex;
     flex-direction: column;
@@ -117,27 +184,42 @@
     align-items: center;
 
 }
+.palabrasRepetidarTitle{
+    color: var(--basic-font-color);
+    text-shadow: var(--basic-shadow-font-color) 5px 1px;
+    margin: 15px;
+    font-size: 1.5em;
+}
 .palabrasRepetidasList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
     justify-content: center;
+    margin: 1em 0 1em 0;
 }
-.gameMain{
+.palabraMarcada {
+    color: white;
+    text-decoration: underline 1px white;
+}
+.palabraSingular {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    font-size: 32px;
-    align-items: center;
-
+}
+.palabraRepetidasFlecha{
+    font-size: 0.4em;
 }
 
+/*TITLE PRINCIPAL*/
 .titleTextContainer{
     height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
+    margin: 2em;
+
+    color: var(--primary-font-color);
+    text-shadow: var(--primary-shadow-font-color) 5px 1px;
 }
 .titleText {
     font-size: 3em;
@@ -148,17 +230,17 @@
     max-width: 30ch;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+ 
 }
 
-.puntajeNum{
-    font-size: 80px;
-}
-
-.palabraMarcada {
-    color: white;
-    text-decoration: underline 1px white;
-}
-.palabraSingular {
-    display: flex;
+@media (max-width: 800px){
+    .inputPalabra{
+        width: 10ch;
+    }
+    .gameMainInputContainer{
+        width: 10ch;
+    }
+    .gameHeader{
+        flex-direction: column;
+    }
 }

@@ -31,7 +31,7 @@ function Timer({tiempo}) {
 
   return (
     <div className="timerContainer">
-        <span style={{fontFamily: 'Geo', fontSize: '80px', height: '1ch'}}>{tiempo}</span>
+        <span style={{fontSize: '2em'}}>{tiempo}</span>
         
      
     </div>

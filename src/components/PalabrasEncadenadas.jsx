@@ -7,10 +7,10 @@ import './Timer.css'
 import GameOver from './GameOver';
 
 function PalabrasEncadenadas() {
-    const [pantallaActual, setPantallaActual] = useState('juegof');
+    const [pantallaActual, setPantallaActual] = useState('juego');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
-    const [letraRequerida, setLetraRequerida] = useState('')
+    const [letraRequerida, setLetraRequerida] = useState('A')
     const [punteja, setPuntaje] = useState(0)
     
     const [palabrasUsadas, setPalabrasUsadas] = useState(listaEjemplo)
@@ -175,38 +175,44 @@ function PalabrasEncadenadas() {
                         <p class="titleText textSize">{palabrasUsadas.length == 0 ? "Escribe una palabra" : `Palabra con ${letraRequerida.toUpperCase()}` }</p>
                     </div>
 
-                <div>
-                    <form onSubmit={validarPalabra} class="gameMain">
-                        {letraRequerida.toUpperCase()}
-                        <input 
-                            type="text"
-                            value={palabraI}
-                            onChange={(e) => setPalabraI(e.target.value)}
-                            placeholder='...'
-                            maxLength={20}
-                            class="inputPalabra"
-                            />
-                            <button className="gameBoton" type="submit">Enviar</button>
-                    </form>
-                    <div className='inputLine'></div>
-                    {error == "" ? (
-                        <p>Es valida? {isValidWord == null ? "Ingrese Palabra": isValidWord ? "True" : "False"} </p>
-                    ) : (
-                        <p>Error: {error}</p>
-                        )
-                    }
                 
-                </div>  
+                    <form onSubmit={validarPalabra} class="gameMain">
+                        <div className="gameMainInputContainer">
+                            <div className="gameMainInput">
+                                <p>{letraRequerida.toUpperCase()}</p>
+                                <input 
+                                    type="text"
+                                    value={palabraI}
+                                    onChange={(e) => setPalabraI(e.target.value)}
+                                    placeholder='...'
+                                    maxLength={20}
+                                    class="inputPalabra"
+                                    />
+                            </div>
+                            <div className='inputLine'></div>
+                        </div>
+                            <button className="botonSubmit" type="submit">Enviar</button>
+                    </form>
+                    <div className="errorInputText">
+                        {error == "" ? (
+                            <p>Es valida? {isValidWord == null ? "Ingrese Palabra": isValidWord ? "True" : "False"} </p>
+                        ) : (
+                            <p className="errorColor">Error: {error}</p>
+                            )
+                        }
+                </div>
+                 
+                    <div className="lineGame"></div>
 
                     <div class="palabrasRepetidasContainer">
-
+                        <div className="palabrasRepetidarTitle">
                         {palabrasUsadas.length > 0 ? (
-                            <p>Palabras usadas con <strong>{letraRequerida.toUpperCase()}</strong></p>
+                            <p>Palabras usadas</p>
                         ) : (
                             <p>Todavia no se ha empezado el juego</p>
                             )
                         }                        
-
+                        </div>
                             <div class="palabrasRepetidasList">
 
                                 {palabrasUsadas.map((palabra, index) => (
@@ -216,7 +222,7 @@ function PalabrasEncadenadas() {
                                     ) : (
                                         <p>{palabra}</p>
                                     )}
-                                     <p> →&nbsp;</p>
+                                    <p className="palabraRepetidasFlecha">&nbsp;→&nbsp;</p>
                                     </div>           
                                 ))}
                             </div>
