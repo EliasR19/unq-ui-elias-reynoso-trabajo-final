@@ -28,6 +28,15 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+
+  --font-family-general: 'PressStart2p';
+
+  --primary-font-color: #ff9700;
+  --primary-shadow-font-color: #b80000;
+
+  --basic-font-color: #ffffff;
+  --basic-shadow-font-color: #000055;
+  
 }
 
 @media (prefers-color-scheme: dark) {
