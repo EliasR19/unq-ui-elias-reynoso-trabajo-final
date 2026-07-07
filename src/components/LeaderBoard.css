@@ -1,32 +1,118 @@
-.leaderBaordContainer{
-    font-family: 'Geo';
+.leaderBoardContainer{
+    font-family: var(--font-family-general);
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+   
+    
 }
 .leaderBoardTitle{
     font-size: 1em;
     line-height: 1;
-}
 
+    text-decoration: underline ;
+    color: #ffffff;
+}
 .labelStatsListContainer{
-    display: flex;
-    flex-direction: row;
+   
     justify-content: space-evenly;
     text-align: center;
-    line-height: 1;
+
+}
+.tableRow {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    justify-content: space-around;
+}
+.headerList {
+    border-bottom: 2px solid #5a6e85;
+    margin-bottom: 15px;
+    padding-bottom: 4px;
+}
+.colRank {
+    width: 5ch;
+    text-align: left;
+}
+.colPlayer{
+    width: 7ch;
+    text-align: center;
+}
+.colScore {
+    width: 6ch;
+    text-align: center;
+}
+.colStats {
+    width: 100%; 
+    display: flex;
+    justify-content: space-around; 
+    font-size: 0.6em;
+}
+.playerList {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.statsRow{
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
 }
 
-.statsList{
+.rankLine{
+    border: 1px solid #9ca3af;
+    margin-top: 1.2em;
+}
+
+
+.test1, .test1-header {
+    display: flex;
+    flex-direction: column;
+    width: 15ch;
+}
+.test1-header {
+    flex-direction: row;
+    justify-content: space-between;
+}
+.test2 {
     display: flex;
     flex-direction: row;
-}
-.rankLine{
-    border: 2px dashed #9ca3af;
-    margin-top: 1.2em;
-
+    width: 100%;
 }
 
-.labelText{
-    text-decoration: underline 3px #9ca3af;
+.top1Color {
+    color: #fafe2e;
+}
+.top23Color {
+    color: #18d0dc;
+}
+.topRestoColor {
+    color: #d00e05;
+    opacity: .7;
+}
+
+@media (max-width: 1000px){
+    .labelText{
+        font-size: 0.8em;
+    }
+    .tableRow {
+        font-size: 1em;
+    }
+    .colStats{
+        font-size: 0.5em;
+    }
+}
+
+@media (max-width: 780px) {
+    .labelText{
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 1500px){
+    .tableRow {
+        font-size: 1em;
+    }
+
 }

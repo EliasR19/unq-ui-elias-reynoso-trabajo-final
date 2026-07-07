@@ -28,7 +28,7 @@ const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
                 <p className="statsText">Points: {puntaje}</p>
                 <p className="statsText">Fails:{errorCount}</p>
             </div>
-            <button className="gameBoton" onClick={reiniciar}>Reiniciar</button>
+            <button className="botonSubmit" onClick={reiniciar}>Reiniciar</button>
 
             <div className="line"></div>
 

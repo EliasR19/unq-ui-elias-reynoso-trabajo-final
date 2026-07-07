@@ -36,12 +36,16 @@
   --primary-font-color: #ff9700;
   --primary-shadow-font-color: #b80000;
 
+  --game-over-font-color: #ffffff;
+  --game-over-shadow-font-color: #ff0055;
+
   --basic-font-color: #ffffff;
   --basic-shadow-font-color: #2121db;
 
   --basic-font-color-2: ;
   --basic-shadow-font-color-2:#47ffff ;
   
+
 }
 
 @media (prefers-color-scheme: dark) {

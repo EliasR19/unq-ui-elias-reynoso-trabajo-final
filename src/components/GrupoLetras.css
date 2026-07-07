@@ -2,13 +2,17 @@
     display: flex;
     flex-direction: column;
     margin: 10px;
-    background-color: #577092;
+    background-color: #1C2532;
     padding: 10px;
     border-radius: 8px;
+
+    border-bottom: 5px solid var(--basic-shadow-font-color); 
+    border-right: 5px solid var(--basic-shadow-font-color);
 }
 .letraHeaderLista{
     font-size: 2em;
     line-height: 1;
+    color: var(--basic-font-color);
 }
 .palabrasContainer {
     display: flex;

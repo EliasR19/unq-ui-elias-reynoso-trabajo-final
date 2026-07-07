@@ -20,43 +20,47 @@ const LeaderBoard = ( {points, errors}) =>{
 
     return (
         
-        <div class="leaderBaordContainer">
+        <div class="leaderBoardContainer">
             {(hayNuevoTop && mostrarModal) && (
                 <ModalPlayerPoints points={points} errors={errors} registrar={actualizar}/>
             )}
-        <p className="leaderBoardTitle">Mejores Puntajes</p>
-        <div className="labelStatsListContainer">
+        <p className="leaderBoardTitle">TOP</p>
 
-              <div className="positionLabel">
-                <p className="labelText">RANK</p>
-                {topPuntajes.map((player, index) =>( 
-                    <p>{numeracion[index]}</p>      
-                ))}
+
+
+        <div className="labelStatsListContainer">
+            <div className="tableRow headerList">
+                <div className="colRank">RANK</div>
+                <div className="test1-header">
+                    <div className="colPlayer">PLAYER</div>
+                    <div className="colScore">SCORE</div>
+                </div>
+
             </div>
             
-            <div className="rankLine"></div>    
-                
-            <div className="playerLabel">
-                <p className="labelText">PLAYER</p>
-                {topPuntajes.map((player) =>( 
+            {topPuntajes.map((player, index) => (
+                <div className="playerList">
+
+                    <div className={`tableRow ${index == 0 ? 'top1Color' : index == 1 || index == 2 ? 'top23Color' : 'topRestoColor'}`} key={index}>
+                        <div className="colRank">{numeracion[index]}</div>
                     
-                    <p>{player.playerName}</p>               
-                ))}
-            </div>
+                        <div className='test1'>
+                            <div className='test2'>
+                                <div className="colPlayer">{player.playerName}</div>           
+                                <div className="colScore">{player.points}</div>
+                            </div>
+                            <div className="statsRow">
+                                <div className="colStats">
+                                    <span>words:{player.errors}</span>                   
+                                    <span>errors:{player.errors}</span>
+                                </div>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+             ))}
 
-            <div className="pointsLabel"> 
-                <p className="labelText">SCORE</p>
-                {topPuntajes.map((player) =>( 
-                    <p>{player.points}</p>              
-                ))}
-            </div>
-
-            <div className="errorsLabel">
-                <p className="labelText">FAILS</p>
-                {topPuntajes.map((player) =>( 
-                    <p>{player.errors}</p>              
-                ))}
-            </div>
         </div>            
         </div>
     )
