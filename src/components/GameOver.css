@@ -13,6 +13,12 @@
     width: 100%;
     flex-grow: 1;
 }
+.headerContainer{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+}
 .finalStatsContainer{
     display: flex;
     gap: 32px;
@@ -59,6 +65,8 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5px #00ffff33;
+
+    
 }
 
 .gameBoton:hover {
@@ -75,8 +83,8 @@
 
 .navBarContainer{
     background-color: var(--bg-color);
-    border-left: 5px solid var(--text);
-
+    border-left: 3px solid var(--text);
+    padding-left: 10px;
 
     font-family: var(--font-family-general);
     color: #EA5455;
@@ -104,7 +112,7 @@
         width: 100%;
     }
     .navBarContainer{
-        width: 100%;
+        width: 98%;
         border-left: none;
         border-top: 5px solid var(--text);
         margin: 15px 0 15px 0;
@@ -115,15 +123,14 @@
         margin-top: 15px;
     }
 }
-
-@media (max-width: 1500px){
-    .navBarTitle{
-        font-size: 1.7em;
+@media (max-width: 1000px){
+    .navBarTitle {
+        font-size: 1.1em;
     }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1300px){
     .navBarTitle{
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 }

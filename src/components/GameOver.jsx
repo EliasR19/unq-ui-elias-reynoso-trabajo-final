@@ -23,13 +23,13 @@ const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
 
         <div className="mainContainerGameOver">
 
-            <p className='gameOverText'>GameOver</p> 
-            <div className="finalStatsContainer">
-                <p className="statsText">Points: {puntaje}</p>
-                <p className="statsText">Fails:{errorCount}</p>
+            <div className="headerContainer">
+                <p className='gameOverText'>GameOver</p> 
+                <div className="finalStatsContainer">
+                    <p className="statsText">Points: {puntaje}</p>
+                </div>
+                <button className="botonSubmit" onClick={reiniciar}>Reiniciar</button>
             </div>
-            <button className="botonSubmit" onClick={reiniciar}>Reiniciar</button>
-
             <div className="line"></div>
 
             <div class="palabrasRepetidasList">
@@ -43,7 +43,7 @@ const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
 
             <div className='navBarContainer'>
                 <p className="navBarTitle">Palabras Encadendas</p>
-                <LeaderBoard points={puntaje} errors={errorCount}/>
+                <LeaderBoard points={puntaje} errors={errorCount} hits={palabrasUsadas.length}/>
             </div>
     </div>
 )

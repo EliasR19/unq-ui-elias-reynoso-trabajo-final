@@ -29,3 +29,13 @@
     box-sizing: border-box;
     width: 100%;
 }
+
+
+@media (max-width: 780px) {
+    .letraHeaderLista{
+        font-size: 1.3em;
+    }
+    .listaLetraEspesifica{
+        font-size: 1em;
+    }
+}

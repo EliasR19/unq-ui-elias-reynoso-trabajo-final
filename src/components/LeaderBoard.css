@@ -3,9 +3,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-
-   
-    
 }
 .leaderBoardTitle{
     font-size: 1em;
@@ -52,7 +49,8 @@
 .playerList {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #6b637541 ;
 }
 .statsRow{
     display: flex;
@@ -97,7 +95,7 @@
         font-size: 0.8em;
     }
     .tableRow {
-        font-size: 1em;
+        font-size: .7em;
     }
     .colStats{
         font-size: 0.5em;
@@ -106,7 +104,7 @@
 
 @media (max-width: 780px) {
     .labelText{
-        font-size: 1em;
+        font-size: .6em;
     }
 }
 
