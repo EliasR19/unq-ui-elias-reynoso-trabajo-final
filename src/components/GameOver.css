@@ -1,0 +1,136 @@
+.mainContainerGameOver{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-general);
+    align-items: center;
+    width: 60%;
+}
+.gameOverContainer{
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+}
+.headerContainer{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+}
+.finalStatsContainer{
+    display: flex;
+    gap: 32px;
+}
+.gameOverText{
+    font-size: 3em;
+    line-height: 1;
+    margin-top: 1em;
+    color: var(--game-over-font-color);
+    text-shadow: var(--game-over-shadow-font-color) 5px 1px;
+}
+.statsText{
+    font-size: 1.5em;
+    line-height: 1;
+
+    color: var(--basic-font-color);
+    text-shadow: var(--basic-shadow-font-color) 5px 1px;
+}
+.line{
+    width: 99%;
+    border: 3px dashed #9ca3af;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.gameBoton{
+    font-family: var(--font-family-general);
+    font-size: 1rem;
+    letter-spacing: 0.1;
+    color: #ffffff;
+    
+    background-color: #577092;
+    
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    
+    border-radius: 8px; 
+    border-bottom: 5px solid #2e62a5; 
+    transition: all 0.1s ease;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #00ffff33;
+
+    
+}
+
+.gameBoton:hover {
+    background-color: #5d79a1;
+    box-shadow: 0 0 8px #00ffff66;
+}
+
+.gameBoton:active {
+    transform: translateY(3px); 
+    border-bottom: 2px solid #2d3f56; 
+    box-shadow: 0 0 5px #00ffff33; 
+}
+
+
+.navBarContainer{
+    background-color: var(--bg-color);
+    border-left: 3px solid var(--text);
+    padding-left: 10px;
+
+    font-family: var(--font-family-general);
+    color: #EA5455;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    line-height: 2;
+    width: 30%;
+}
+.navBarTitle{
+    font-size: 2em;
+    line-height: 1;
+    margin-top: 1em;
+    color: var(--primary-font-color);
+    text-shadow: var(--primary-shadow-font-color) 5px 1px;
+}
+
+@media (max-width: 800px) {
+    .gameOverContainer{
+        flex-direction: column;
+        width: 100%;
+    }
+    .mainContainerGameOver{
+        width: 100%;
+    }
+    .navBarContainer{
+        width: 98%;
+        border-left: none;
+        border-top: 5px solid var(--text);
+        margin: 15px 0 15px 0;
+
+    }
+    .navBarTitle{
+        font-size: 2em;
+        margin-top: 15px;
+    }
+}
+@media (max-width: 1000px){
+    .navBarTitle {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 1300px){
+    .navBarTitle{
+        font-size: 1.4em;
+    }
+}

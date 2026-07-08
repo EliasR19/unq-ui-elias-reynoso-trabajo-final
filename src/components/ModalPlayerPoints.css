@@ -1,0 +1,108 @@
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.arcadeModal {
+    background-color: #000000;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    font-family: var(--font-family-general);
+
+    border: 4px solid #fff;
+    outline: 4px solid #ffffff; 
+    outline-offset: -12px;
+
+
+}
+.modalTitle {
+    color: #ff3333;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: blink 1.5s infinite;
+    font-family: 'Press Start 2P', var(--font-family-general), monospace;
+}
+.modalLabel {
+    font-size: 0.75rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+.modalStatsTable {
+    width: 240px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.modalStatsTable .statsRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+.modalInput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 5px dashed #00ffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 12px;
+    width: 40%;
+    text-align: center;
+    text-transform: uppercase;
+    outline: none;
+    margin-bottom: 30px;
+    font-family: 'Press Start 2P', var(--font-family-general);
+    letter-spacing: 8px;
+    caret-color: transparent; 
+
+animation: cursorParpadeo 0.8s infinite steps(2);}
+.modalInput:focus {
+    border-bottom-color: #ff3333;
+    color: #ff3333;
+}
+.modalButton {
+    background-color: transparent;
+    color: #ffff00; /* Texto amarillo titilante de inserte moneda */
+    border: 2px solid #ffff00;
+    padding: 12px 20px;
+    font-family: var(--font-family-general);
+    font-size: .75rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+    animation: blink 1.2s infinite steps(2);
+}
+.modalButton:active {
+    transform: scale(0.95);
+}
+.modalButton:hover {
+    background-color: #ffff00;
+    color: #000000;
+}
+.blink {
+    animation: blink 0.6s infinite steps(2);
+}
+.labelCyan { color: #00ffff; } 
+.labelYellow { color: #ffff00; } 
+.labelRed { color: #ff3333; } 
+.labelWhite { color: #ffffff; } 
+.labelGreen { color: #00FF00; }
+.labelViolet { color: #9400D3;}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+

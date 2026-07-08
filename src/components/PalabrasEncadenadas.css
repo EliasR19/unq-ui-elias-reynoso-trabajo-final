@@ -1,4 +1,6 @@
 @import url('../assets/fonts/Geo/geo.css');
+@import url('../assets/fonts/Press_Start_2P/press_start_2p.css');
+
 .pageContainer {
     background-color: #2D4059;
     display: flex;
@@ -6,75 +8,144 @@
     width: 100%;
     flex-grow: 1;
 }
-.navBarContainer{
-    background-color: #FFD460;
-    font-size: 32px;
-    color: #EA5455;
-    width: 20%;
+.pageContainer > *:not(.fondo-animado) {
+    /*busca todos los elementos que sean hijos directos de .pageContainer, EXCEPTO el que tenga la clase .fondoError*/
+    z-index: 1;
+}
+@keyframes errorBack {
+    0% {
+        background-color: #ff4d4d; 
+    }
+    100% {
+        background-color: var(--bg-color);
+    }
+}
 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.fondoError {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: var(--bg-color);
+}
+
+.fondoError.error {
+    animation: errorBack 1s ease-out forwards;
 }
 .mainContainer{
-        flex-grow: 1;
+    flex-grow: 1;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Geo';
+    font-family: var(--font-family-general);
     align-items: center;
+
+    width: 100%;
 }
+
+/*TIMER POINTS HEADER*/
 .gameHeader{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    margin: 20px;
-    font-size: 32px;
+    font-size: 1.5em;
+    line-height: 1;
+    margin: 20px 0 20px 0;
+
+    color: var(--basic-font-color);
+    text-shadow: var(--basic-shadow-font-color) 5px 1px;
+}
+.puntajeNum{
+    font-size: 2em;
 }
 .timerHeader {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+/*INPUT*/
 .gameContainer{
     flex-grow: 1;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Geo';
+    /*font-family: 'Geo';*/
     align-items: center;
     width: 100%;
+
+    gap: 1em;
 }
 .inputPalabra{
     border: 0;
     outline: 0;
     padding: '0';
     width: 20ch;
-    font-family: 'Geo';
+    font-family: var(--font-family-general);
     font-size: 32px;
     background-color: transparent;
     padding: 0;
+    color: var(--text);
+}
+.inputPalabra::placeholder{
+    color: #ffffff;
+}
+.gameMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 2em;
+    align-items: center;
+
+    
+
+
+}
+.gameMainInputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 20ch;
+}
+.gameMainInput{
+    display: flex;
+    flex-direction: row;
+    line-height: 1;
+    align-items: center;
+}
+.gameMainInput p {
+    color: #ffffff;
 }
 .inputLine{
     border-bottom: 3px solid #9ca3af;
 }
 
 .botonSubmit {
-  background-color: #495DF9;
-  color: #ffffff;
-  font-family: 'Geo'; 
-  font-size: 18px;
-  font-weight: 600;
-  
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    border: none;
+    background-color: var(--bg-color);
+    border-radius: 8px; 
+    border-bottom: 5px solid #47ffff; 
+    border-right: 5px solid #47ffff;
+
+    font-family: var(--font-family-general); 
+    color: #47ffff;
+
+
+    margin: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
 
 }
 .botonSubmit:hover {
-  background-color: #3546D6; 
+    background-color: white;/*#3546D6*/; 
+    color: var(--basic-shadow-font-color);
+    border-bottom: 5px solid var(--basic-shadow-font-color); 
+    border-right: 5px solid var(--basic-shadow-font-color);
 }
 /*
 .botonSubmit:disabled {
@@ -84,11 +155,26 @@
   box-shadow: none;
 }
 */
+.errorInputText{
+    
+}
+.errorColor{
+    color:#ff4d4d;
+}
+.validColor{
+    color: #34a343;
+}
 
+.lineGame{
+    width: 99%;
+    border: 3px dashed #9ca3af;
+}
+
+/*PALABRAS REPETIDAS*/
 .palabrasRepetidasContainer{
     width: 80%;
-    font-family: 'Geo';
-    font-size: 1.5em;
+    /*font-family: 'Geo';*/
+    font-size: 1em;
 
     display: flex;
     flex-direction: column;
@@ -96,41 +182,133 @@
     align-items: center;
 
 }
+.palabrasRepetidarTitle{
+    color: var(--basic-font-color);
+    text-shadow: var(--basic-shadow-font-color) 5px 1px;
+    margin: 15px;
+    font-size: 1.5em;
+}
 .palabrasRepetidasList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
     justify-content: center;
+    margin: 1em 0 1em 0;
 }
-.gameMain{
+.palabraMarcada {
+    color: white;
+    text-decoration: underline 1px white;
+}
+.palabraSingular {
+    display: flex;
+}
+.palabraRepetidasFlecha{
+    font-size: 0.4em;
+}
+
+/*TITLE PRINCIPAL*/
+.gameTitleContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    font-size: 32px;
+    gap: 10px;
+    width: 100%;
+    height: 15%;
     align-items: center;
+    justify-content: center;
+
 
 }
+.titleGame{
+   font-size: 3em; 
+   line-height: 1;
 
+    background: linear-gradient(to bottom, #EA0000 21%, #9903FF 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+            0  1.1ex #9903FF59,
+            0 -1.1ex #EA000059,
+            0  2.1ex #9903FF26,
+            0 -2.1ex #EA000026;
+
+}
+.chainImg{
+    max-width: 6em;
+    max-height: 6em;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+.flip{
+    transform: scale(-1, -1);
+}
 .titleTextContainer{
     height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
+    margin: 2em;
+
+    width: 100%;
+
+    color: var(--primary-font-color);
+    text-shadow: var(--primary-shadow-font-color) 5px 1px;
 }
 .titleText {
     font-size: 3em;
     padding: 15px;
+    font-size: 2em;
 }
 
 .textSize{
     max-width: 30ch;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+ 
 }
 
-.puntajeNum{
-    font-size: 80px;
+@media (max-width: 800px){
+    .inputPalabra{
+        width: 100%;
+    }
+    .gameMainInputContainer{
+        width: 100%;
+    }
+    .gameMain{
+        flex-direction: column;
+    }
+    .gameHeader{
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .titleText{
+        font-size: 2em;
+    }
+    .hideMedia{
+        display: none;
+    }
+    .titleGame{
+    font-size: 1.9em; 
+    text-shadow: none;
+    }
+    .gameTitleContainer{
+    flex-direction: column;
+    }
 }
-
+@media (max-width: 1300px){
+    .titleGame{
+        font-size: 2em;
+    }
+    .hideMedia{
+        display: none;
+    }
+}
+@media (max-width: 1000px){
+    .titleGame{
+        font-size: 2em;
+    }
+}

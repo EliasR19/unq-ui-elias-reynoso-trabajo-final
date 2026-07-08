@@ -1,7 +1,6 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
@@ -28,6 +27,25 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+
+  --font-family-general: 'PressStart2p';
+  --bg-color: #0D1117;;
+ 
+
+
+  --primary-font-color: #ff9700;
+  --primary-shadow-font-color: #b80000;
+
+  --game-over-font-color: #ffffff;
+  --game-over-shadow-font-color: #ff0055;
+
+  --basic-font-color: #ffffff;
+  --basic-shadow-font-color: #2121db;
+
+  --basic-font-color-2: ;
+  --basic-shadow-font-color-2:#47ffff ;
+  
+
 }
 
 @media (prefers-color-scheme: dark) {

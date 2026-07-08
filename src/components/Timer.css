@@ -6,11 +6,10 @@
 
 }
 .timerBarProgressContainer {
-    height: 5px;
+    height: 15px;
     width: 100%;
     background-color: #e0e0e0;
     overflow: hidden;
-    margin-bottom: 20px;
 
 }
 .timerBarProgress {

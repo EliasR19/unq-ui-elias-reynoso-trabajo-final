@@ -1,0 +1,41 @@
+.listaPalabrasFinal{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background-color: #1C2532;
+    padding: 10px;
+    border-radius: 8px;
+
+    border-bottom: 5px solid var(--basic-shadow-font-color); 
+    border-right: 5px solid var(--basic-shadow-font-color);
+}
+.letraHeaderLista{
+    font-size: 2em;
+    line-height: 1;
+    color: var(--basic-font-color);
+}
+.palabrasContainer {
+    display: flex;
+    flex-direction: column;
+}
+.palabrasContainer.multiColumna {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.listaLetraEspesifica{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5em;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+@media (max-width: 780px) {
+    .letraHeaderLista{
+        font-size: 1.3em;
+    }
+    .listaLetraEspesifica{
+        font-size: 1em;
+    }
+}
