@@ -7,13 +7,13 @@ import './Timer.css'
 import GameOver from './GameOver';
 
 function PalabrasEncadenadas() {
-    const [pantallaActual, setPantallaActual] = useState('juegof');
+    const [pantallaActual, setPantallaActual] = useState('juego');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
     const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
     
-    const [palabrasUsadas, setPalabrasUsadas] = useState(listaEjemplo)
+    const [palabrasUsadas, setPalabrasUsadas] = useState([])//listaEjemplo)
     
     const [errorCount, setErrorCount] = useState(0);
     const [error, setError] = useState("")
