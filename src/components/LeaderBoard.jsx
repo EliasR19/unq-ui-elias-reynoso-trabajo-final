@@ -4,7 +4,7 @@ import { obtenerTop, actualizarLeaderBoard } from '../services/storage';
 import { useState } from 'react';
 import { numeracion } from '../services/utils';
 
-const LeaderBoard = ( {points, errors}) =>{
+const LeaderBoard = ( {points, errors, hits}) =>{
 
     const [mostrarModal, setMostrarModal] = useState(true);
     const [topPuntajes, setTopPuntajes] = useState(obtenerTop());
@@ -13,7 +13,7 @@ const LeaderBoard = ( {points, errors}) =>{
 
 
     const actualizar = (playerChr) => {
-        actualizarLeaderBoard(playerChr.toUpperCase(), points, errors);
+        actualizarLeaderBoard(playerChr.toUpperCase(), points, errors, hits);
         setTopPuntajes(obtenerTop());
         setMostrarModal(false);
     }
@@ -22,7 +22,7 @@ const LeaderBoard = ( {points, errors}) =>{
         
         <div class="leaderBoardContainer">
             {(hayNuevoTop && mostrarModal) && (
-                <ModalPlayerPoints points={points} errors={errors} registrar={actualizar}/>
+                <ModalPlayerPoints points={points} errors={errors} hits={hits} registrar={actualizar}/>
             )}
         <p className="leaderBoardTitle">TOP</p>
 
@@ -51,8 +51,8 @@ const LeaderBoard = ( {points, errors}) =>{
                             </div>
                             <div className="statsRow">
                                 <div className="colStats">
-                                    <span>words:{player.errors}</span>                   
-                                    <span>errors:{player.errors}</span>
+                                    <span>hits:{player.hits}</span>                   
+                                    <span>miss:{player.errors}</span>
                                 </div>
                             </div>
                     

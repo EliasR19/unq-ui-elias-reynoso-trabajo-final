@@ -7,13 +7,13 @@ import './Timer.css'
 import GameOver from './GameOver';
 
 function PalabrasEncadenadas() {
-    const [pantallaActual, setPantallaActual] = useState('juego');
+    const [pantallaActual, setPantallaActual] = useState('juegof');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
     const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
     
-    const [palabrasUsadas, setPalabrasUsadas] = useState([])//listaEjemplo)
+    const [palabrasUsadas, setPalabrasUsadas] = useState(listaEjemplo)
     
     const [errorCount, setErrorCount] = useState(0);
     const [error, setError] = useState("")
@@ -36,21 +36,24 @@ function PalabrasEncadenadas() {
     const intentaDeNuevo = "Intenta de nuevo!"
     const validarPalabra = async (e) => {
         e.preventDefault();
-
         setCargando(true);
         setError("")
+
+        if(cargando) return;
+
         //console.log("letraRequerida+palabraI: ", letraRequerida+palabraI);
         
         const palabraLimpia = normlizarPalabra(letraRequerida+palabraI);
         console.log("palabraLimpia: ", palabraLimpia)
-        if(palabraLimpia.trim() === "") return;
         
-        const isValid =  await validador(palabraLimpia);
-        setIsValidWord(isValid.data.exists);
-
-        setCargando(false)  
-
         //Validadores
+        if(palabraLimpia.trim() == "" || palabraLimpia.trim().length == 0){
+            //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+            setError('Ingrese una palabra')
+            setCargando(false)  
+           // accionesSiPalabraInvalida();
+            return;
+        }
         if(isRunning){
             //Se puede mover a un archivo de validadores
             if(palabrasUsadas.includes(palabraLimpia)){
@@ -65,13 +68,11 @@ function PalabrasEncadenadas() {
                 accionesSiPalabraInvalida();
                 return;
             }
-            if(palabraLimpia.trim() === ""){
-                //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
-                setError('Ingrese una palabra')
-                accionesSiPalabraInvalida();
-                return;
-            }
         } 
+
+        const isValid =  await validador(palabraLimpia);
+        setIsValidWord(isValid.data.exists);
+
 
         //Valida que la palabra exista con la API
         if(isValid.data.exists){
@@ -86,30 +87,36 @@ function PalabrasEncadenadas() {
             }
 
          } else {
-            setPalabraI("")  
-            setErrorCount(prev => prev + 1)
-            //alert(`¡La palabra "${palabraI}" no existe`);
-            setError(`¡La palabra "${palabraLimpia}" no existe. ${intentaDeNuevo}`)
-            return;
+                setError(`¡La palabra "${palabraLimpia}" no existe. ${intentaDeNuevo}`)
+                accionesSiPalabraInvalida(palabraLimpia)
+                return;
         }
 
 
-        setPalabraI("")          
+        setPalabraI("")     
+     
         return;
 
     }
 
     const accionesSiEsPalabraValida = (palabraLimpia) => {
+        if(!cargando){
             setPalabrasUsadas([...palabrasUsadas, palabraLimpia])
             setPuntaje(punteja+palabraLimpia.length)
             setTiempo(() => 15)
+            setCargando(false)  
+        }
     }
 
     const accionesSiPalabraInvalida = () => {
+        if(!cargando){
             setPalabraI("")  
             setIsValidWord(false)
             setErrorCount(prev => prev + 1)
+            setCargando(false)  
+        }
     }
+
 
     
    // console.log(palabrasUsadas + " | " + letraRequerida )
@@ -185,7 +192,14 @@ function PalabrasEncadenadas() {
 
 
                 <div class="gameContainer">
+                    <div className='gameTitleContainer'>
+                        <img src='/chain-2.png' className='chainImg flip hideMedia'/>
+                        <p className='titleGame'>PALABRAS</p>
+                        <img src='/chain-mid-2.png' className='chainImg  hideMedia'/>
+                        <p className='titleGame'>ENCADENADAS</p>
+                        <img src='/chain-2.png' className='chainImg hideMedia'/>
 
+                    </div>
                     <div class="titleTextContainer">
                         <p class="titleText textSize">{palabrasUsadas.length == 0 ? "Escribe una palabra" : `Palabra con ${letraRequerida.toUpperCase()}` }</p>
                     </div>
