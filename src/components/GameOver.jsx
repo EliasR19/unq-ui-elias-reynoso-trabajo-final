@@ -5,6 +5,8 @@ import { letrasAbecedarios } from '../services/utils';
 
 const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
 
+    
+
     const palabrasConLetra = (letra) => {
         const palabrasFiltradas = [];
 
@@ -15,7 +17,6 @@ const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
         }
         return palabrasFiltradas
     }
-
 
 
     return (

@@ -1,6 +1,7 @@
 import './LeaderBoard.css'
 import ModalPlayerPoints from './ModalPlayerPoints';
-import { obtenerTop, actualizarLeaderBoard } from '../services/storage';
+import { obtenerTop } from '../services/storage';
+import { actualizarLeaderBoard } from '../services/utils';
 import { useState } from 'react';
 import { numeracion } from '../services/utils';
 

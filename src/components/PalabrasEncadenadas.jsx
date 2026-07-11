@@ -7,7 +7,7 @@ import './Timer.css'
 import GameOver from './GameOver';
 
 function PalabrasEncadenadas() {
-    const [pantallaActual, setPantallaActual] = useState('juego');
+    const [pantallaActual, setPantallaActual] = useState('juegof');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
     const [letraRequerida, setLetraRequerida] = useState('')
@@ -29,7 +29,7 @@ function PalabrasEncadenadas() {
         try{
             return await verificarPalabra(palabraLimpia);
         }catch(error) {
-             console.log(error) // hacer alerta
+             return alert("Ocurrio un error");
         }
     }
     
@@ -44,7 +44,7 @@ function PalabrasEncadenadas() {
         //console.log("letraRequerida+palabraI: ", letraRequerida+palabraI);
         
         const palabraLimpia = normlizarPalabra(letraRequerida+palabraI);
-        console.log("palabraLimpia: ", palabraLimpia)
+        //console.log("palabraLimpia: ", palabraLimpia)
         
         //Validadores
         if(palabraLimpia.trim() == "" || palabraLimpia.trim().length == 0){
@@ -116,24 +116,22 @@ function PalabrasEncadenadas() {
             setCargando(false)  
         }
     }
-
-
-    
-   // console.log(palabrasUsadas + " | " + letraRequerida )
     
     // ### TIMER
-    //Se puede mover a un componente header
     useEffect(() => {
-        if(tiempo <= -1){
-            setIsRunning(false);
-            setPantallaActual('gameOver')
-            return;
-        }
         let interval = null;
         if(isRunning){  
-            interval = setTimeout(() => setTiempo((tiempoAcutal) => tiempoAcutal-1), 1000);
+            interval = setTimeout(() => setTiempo((tiempoAcutal) => {
+                                if(tiempo <= 0){
+                                    setIsRunning(false)
+                                    setPantallaActual('gameOver')
+                                    return 0;
+                                }    
+                                return tiempoAcutal-1;
+            }
+            ), 1000);
         }
-        return () => clearInterval(interval)
+        return () => clearTimeout(interval)
     }, [tiempo,isRunning])
 
     const restante = (tiempo / 15) * 100;
@@ -142,6 +140,8 @@ function PalabrasEncadenadas() {
       if(tiempo <= 10 && tiempo > 5)return 'yellow'
       return 'green'
     })
+
+
 
     const reiniciarJuego = () => {
         setPantallaActual('juego');

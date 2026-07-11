@@ -1,4 +1,3 @@
-@import url('../assets/fonts/Geo/geo.css');
 @import url('../assets/fonts/Press_Start_2P/press_start_2p.css');
 
 .pageContainer {
@@ -74,7 +73,6 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-    /*font-family: 'Geo';*/
     align-items: center;
     width: 100%;
 
@@ -173,7 +171,6 @@
 /*PALABRAS REPETIDAS*/
 .palabrasRepetidasContainer{
     width: 80%;
-    /*font-family: 'Geo';*/
     font-size: 1em;
 
     display: flex;
