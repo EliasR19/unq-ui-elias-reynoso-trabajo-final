@@ -22,7 +22,7 @@
 }
 
 .fondoError {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -228,12 +228,13 @@
     -webkit-text-fill-color: transparent;
 
     text-shadow:
-            0  1.1ex #9903FF59,
-            0 -1.1ex #EA000059,
-            0  2.1ex #9903FF26,
-            0 -2.1ex #EA000026;
-
-}
+    0  1.1ex #9903FF59,
+    0  2.1ex #9903FF26;
+    /*
+    0 -1.1ex #EA000059,
+    0 -2.1ex #EA000026;
+    */
+    }
 .chainImg{
     max-width: 6em;
     max-height: 6em;

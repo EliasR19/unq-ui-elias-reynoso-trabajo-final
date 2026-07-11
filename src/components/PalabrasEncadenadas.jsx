@@ -168,7 +168,7 @@ function PalabrasEncadenadas() {
         }
     }
   return (
-    <div className={`pageContainer`}>
+    <div className={`pageContainer`}>       
 
         {pantallaActual === 'juego' ? (
 
@@ -176,6 +176,14 @@ function PalabrasEncadenadas() {
             <div key={errorCount} className={`fondoError ${errorCount > 0 ? 'error' : ''}`} />
 
             <div className="mainContainer">
+
+                <div className='gameTitleContainer'>
+                        <img src='/chain-2.png' className='chainImg flip hideMedia'/>
+                        <p className='titleGame'>PALABRAS</p>
+                        <img src='/chain-mid-2.png' className='chainImg  hideMedia'/>
+                        <p className='titleGame'>ENCADENADAS</p>
+                        <img src='/chain-2.png' className='chainImg hideMedia'/>
+                    </div>
 
                 <div className="gameHeader">
                     <div className="timerHeader">Points: <p className="puntajeNum">{punteja}</p></div>
@@ -192,14 +200,9 @@ function PalabrasEncadenadas() {
 
 
                 <div class="gameContainer">
-                    <div className='gameTitleContainer'>
-                        <img src='/chain-2.png' className='chainImg flip hideMedia'/>
-                        <p className='titleGame'>PALABRAS</p>
-                        <img src='/chain-mid-2.png' className='chainImg  hideMedia'/>
-                        <p className='titleGame'>ENCADENADAS</p>
-                        <img src='/chain-2.png' className='chainImg hideMedia'/>
 
-                    </div>
+                    
+
                     <div class="titleTextContainer">
                         <p class="titleText textSize">{palabrasUsadas.length == 0 ? "Escribe una palabra" : `Palabra con ${letraRequerida.toUpperCase()}` }</p>
                     </div>
