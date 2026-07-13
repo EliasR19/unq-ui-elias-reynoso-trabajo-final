@@ -36,7 +36,7 @@ Total: 13 puntos
 ### Dowload
 ```
 git clone https://github.com/EliasR19/unq-ui-elias-reynoso-trabajo-final.git
-cd PalabrasEncadenadasTP/
+cd PalabrasEncadenadasTP
 npm install
 ```
 
