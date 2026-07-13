@@ -1,4 +1,5 @@
 # 2026s1 - TP Integrador - Palabras Encadenadas
+[Trabajo practico integrador de Construccion de Interfaces de Usuario](https://github.com/unq-ui/material/blob/master/TFIs/2026s1-TFI.md)
 
 ### Reglas del Juego
 
@@ -44,3 +45,4 @@ npm install
 ```
 npm start
 ```
+En tu buscador ingresas al link [localhost:5173](http://localhost:5173/)
