@@ -16,15 +16,15 @@ const ModalPlayerPoints = ({points, errors, hits, registrar}) => {
     }
 
     return(
-        <div class="modalContainer">
-            <div class="arcadeModal">
-                <h2 class="modalTitle">¡NUEVO RECORD!</h2>
-                <p class="modalLabel labelCyan">INGRESA TUS INICIALES</p>
+        <div className="modalContainer">
+            <div className="arcadeModal">
+                <h2 className="modalTitle">¡NUEVO RECORD!</h2>
+                <p className="modalLabel labelCyan">INGRESA TUS INICIALES</p>
                 
                 <form onSubmit={validadorPlayer}>
                     <input 
                         type="text" 
-                        class="modalInput" 
+                        className="modalInput" 
                         maxlength="3" 
                         value={player.toUpperCase()}
                         onChange={(e) => setPlayer(e.target.value)}
@@ -48,7 +48,7 @@ const ModalPlayerPoints = ({points, errors, hits, registrar}) => {
                             <span className="labelWhite">{errors} ERR</span>
                         </div>
                     </div>
-                    <button type="submit" class="modalButton">REGISTRAR</button>
+                    <button type="submit" className="modalButton">REGISTRAR</button>
                 </form>
             </div>
         </div>

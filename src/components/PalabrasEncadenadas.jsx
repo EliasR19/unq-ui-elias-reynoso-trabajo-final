@@ -2,18 +2,18 @@ import './PalabrasEncadenadas.css'
 import { useEffect, useState } from 'react';
 import Timer from './timer';
 import { verificarPalabra } from '../services/api';
-import { normlizarPalabra, listaEjemplo } from '../services/utils';
+import { normlizarPalabra } from '../services/utils';
 import './Timer.css'
 import GameOver from './GameOver';
 
 function PalabrasEncadenadas() {
-    const [pantallaActual, setPantallaActual] = useState('juegof');
+    const [pantallaActual, setPantallaActual] = useState('juego');
     const [isValidWord, setIsValidWord] = useState(null);
     const [palabraI, setPalabraI] = useState("")
     const [letraRequerida, setLetraRequerida] = useState('')
     const [punteja, setPuntaje] = useState(0)
     
-    const [palabrasUsadas, setPalabrasUsadas] = useState([])//listaEjemplo)
+    const [palabrasUsadas, setPalabrasUsadas] = useState([])
     
     const [errorCount, setErrorCount] = useState(0);
     const [error, setError] = useState("")
@@ -29,7 +29,7 @@ function PalabrasEncadenadas() {
         try{
             return await verificarPalabra(palabraLimpia);
         }catch(error) {
-             return alert("Ocurrio un error");
+             return alert("Ocurrio un error.");
         }
     }
     
@@ -38,32 +38,25 @@ function PalabrasEncadenadas() {
         e.preventDefault();
         setCargando(true);
         setError("")
-
         if(cargando) return;
 
-        //console.log("letraRequerida+palabraI: ", letraRequerida+palabraI);
         
-        const palabraLimpia = normlizarPalabra(letraRequerida+palabraI);
-        //console.log("palabraLimpia: ", palabraLimpia)
-        
+        const palabraLimpia = normlizarPalabra(letraRequerida+palabraI);  
+
         //Validadores
         if(palabraLimpia.trim() == "" || palabraLimpia.trim().length == 0){
-            //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
             setError('Ingrese una palabra')
             setCargando(false)  
-           // accionesSiPalabraInvalida();
             return;
         }
         if(isRunning){
-            //Se puede mover a un archivo de validadores
             if(palabrasUsadas.includes(palabraLimpia)){
-                //alert(`¡La palabra "${palabraLimpia}" ya fue usada! Elige otra.`);
                 setError(`¡La palabra "${palabraLimpia}" ya fue usada! ${intentaDeNuevo}`)
                 accionesSiPalabraInvalida();
                 return;
             }
             if(palabraLimpia.charAt(0) != letraRequerida){
-                //alert(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'.`);
+                //No deberia haber un caso donde se llegue aca.
                 setError(`¡La palabra "${palabraLimpia}" no empieza con la letra '${letraRequerida.toUpperCase()}'. ${intentaDeNuevo}`)
                 accionesSiPalabraInvalida();
                 return;
@@ -76,7 +69,6 @@ function PalabrasEncadenadas() {
 
         //Valida que la palabra exista con la API
         if(isValid.data.exists){
-            //console.log("palabra valida");
             accionesSiEsPalabraValida(palabraLimpia);
 
             if(isRunning) {
@@ -91,10 +83,7 @@ function PalabrasEncadenadas() {
                 accionesSiPalabraInvalida(palabraLimpia)
                 return;
         }
-
-
         setPalabraI("")     
-     
         return;
 
     }
@@ -126,11 +115,12 @@ function PalabrasEncadenadas() {
                                     setIsRunning(false)
                                     setPantallaActual('gameOver')
                                     return 0;
-                                }    
+                                }        
                                 return tiempoAcutal-1;
-            }
-            ), 1000);
+                            }
+                ), 1000);
         }
+
         return () => clearTimeout(interval)
     }, [tiempo,isRunning])
 
@@ -160,13 +150,14 @@ function PalabrasEncadenadas() {
         if(cargando){
             return <p>Validando...</p>
         }
-
         if(error == ""){
             return <p className={isValidWord ? "validColor" : ""}>{isValidWord == null ? "Ingrese Palabra": isValidWord ? "Valida" : "Invalida"}</p>
         }  else {
             return <p className="errorColor">Error: {error}.</p>
         }
     }
+
+
   return (
     <div className={`pageContainer`}>       
 
@@ -199,16 +190,16 @@ function PalabrasEncadenadas() {
 
 
 
-                <div class="gameContainer">
+                <div className="gameContainer">
 
                     
 
-                    <div class="titleTextContainer">
-                        <p class="titleText textSize">{palabrasUsadas.length == 0 ? "Escribe una palabra" : `Palabra con ${letraRequerida.toUpperCase()}` }</p>
+                    <div className="titleTextContainer">
+                        <p className="titleText textSize">{palabrasUsadas.length == 0 ? "Escribe una palabra" : `Palabra con ${letraRequerida.toUpperCase()}` }</p>
                     </div>
 
                 
-                    <form onSubmit={validarPalabra} class="gameMain">
+                    <form onSubmit={validarPalabra} className="gameMain">
                         <div className="gameMainInputContainer">
                             <div className="gameMainInput">
                                 <p>{letraRequerida.toUpperCase()}</p>
@@ -218,12 +209,12 @@ function PalabrasEncadenadas() {
                                     onChange={(e) => setPalabraI(e.target.value)}
                                     placeholder='...'
                                     maxLength={20}
-                                    class="inputPalabra"
+                                    className="inputPalabra"
                                     />
                             </div>
                             <div className='inputLine'></div>
                         </div>
-                            <button className="botonSubmit" type="submit">Enviar</button>
+                            <button className="botonSubmit" type="submit">Validar</button>
                     </form>
                     <div className="errorInputText">
 
@@ -233,7 +224,7 @@ function PalabrasEncadenadas() {
                  
                     <div className="lineGame"></div>
 
-                    <div class="palabrasRepetidasContainer">
+                    <div className="palabrasRepetidasContainer">
                         <div className="palabrasRepetidarTitle">
                         {palabrasUsadas.length > 0 ? (
                             <p>Palabras usadas</p>
@@ -242,7 +233,7 @@ function PalabrasEncadenadas() {
                             )
                         }                        
                         </div>
-                            <div class="palabrasRepetidasList">
+                            <div className="palabrasRepetidasList">
 
                                 {palabrasUsadas.map((palabra, index) => (
                                     <div className='palabraSingular' key={`${palabra} + "_" + ${index}`}>

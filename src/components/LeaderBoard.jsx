@@ -21,7 +21,7 @@ const LeaderBoard = ( {points, errors, hits}) =>{
 
     return (
         
-        <div class="leaderBoardContainer">
+        <div className="leaderBoardContainer">
             {(hayNuevoTop && mostrarModal) && (
                 <ModalPlayerPoints points={points} errors={errors} hits={hits} registrar={actualizar}/>
             )}

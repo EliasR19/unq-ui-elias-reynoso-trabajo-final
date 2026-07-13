@@ -33,7 +33,7 @@ const GameOver = ({puntaje, errorCount, palabrasUsadas, reiniciar}) => {
             </div>
             <div className="line"></div>
 
-            <div class="palabrasRepetidasList">
+            <div className="palabrasRepetidasList">
                 {letrasAbecedarios.map((letra, index) => 
                     <GrupoLetras letra={letra} palabrasFiltradas={palabrasConLetra(letra)} index={index}/>
                 )}
